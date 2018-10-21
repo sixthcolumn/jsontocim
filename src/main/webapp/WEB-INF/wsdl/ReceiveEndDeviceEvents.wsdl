@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2015 rel. 4 sp1 (x64) (http://www.altova.com) by Christopher Kardos (private) -->
+<wsdl:definitions xmlns:tns="http://iec.ch/TC57/2017/ReceiveEndDeviceEvents" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:wsi="http://ws-i.org/schemas/conformanceClaim/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:infoMessage="http://iec.ch/TC57/2017/EndDeviceEventsMessage" name="ReceiveEndDeviceEvents" targetNamespace="http://iec.ch/TC57/2017/ReceiveEndDeviceEvents">
+	<wsdl:types>
+		<xs:schema targetNamespace="http://iec.ch/TC57/2017/ReceiveEndDeviceEvents" elementFormDefault="qualified">
+			<xs:import namespace="http://iec.ch/TC57/2017/EndDeviceEventsMessage" schemaLocation="xsd/EndDeviceEventsMessage.xsd"/>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="CreatedEndDeviceEventsEventMessage">
+		<wsdl:part name="CreatedEndDeviceEventsEventMessage" element="infoMessage:CreatedEndDeviceEvents"/>
+	</wsdl:message>
+	<wsdl:message name="ResponseMessage">
+		<wsdl:part name="ResponseMessage" element="infoMessage:EndDeviceEventsResponseMessage"/>
+	</wsdl:message>
+	<wsdl:message name="FaultMessage">
+		<wsdl:part name="FaultMessage" element="infoMessage:EndDeviceEventsFaultMessage"/>
+	</wsdl:message>
+	<wsdl:portType name="EndDeviceEvents_Port">
+		<wsdl:operation name="CreatedEndDeviceEvents">
+			<wsdl:input name="CreatedEndDeviceEventsEvent" message="tns:CreatedEndDeviceEventsEventMessage"/>
+			<wsdl:output name="CreatedEndDeviceEventsResponse" message="tns:ResponseMessage"/>
+			<wsdl:fault name="CreatedEndDeviceEventsFault" message="tns:FaultMessage"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="EndDeviceEvents_Binding" type="tns:EndDeviceEvents_Port">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="CreatedEndDeviceEvents">
+			<soap:operation soapAction="http://iec.ch/TC57/2017/EndDeviceEvents/CreatedEndDeviceEvents" style="document"/>
+			<wsdl:input name="CreatedEndDeviceEventsEvent">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="CreatedEndDeviceEventsResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="CreatedEndDeviceEventsFault">
+				<soap:fault name="CreatedEndDeviceEventsFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="ReceiveEndDeviceEvents">
+		<wsdl:port name="EndDeviceEvents_Port" binding="tns:EndDeviceEvents_Binding">
+			<soap:address location="http://iec.ch/TC57/2017/ReceiveEndDeviceEvents"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

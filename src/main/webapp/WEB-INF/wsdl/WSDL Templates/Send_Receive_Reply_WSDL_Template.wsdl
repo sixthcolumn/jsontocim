@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:tns="http://iec.ch/TC57/2017/{Send | Receive | Reply}{Information_Object_Name}" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:wsi="http://ws-i.org/schemas/conformanceClaim/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:infoMessage="http://iec.ch/TC57/2017/{Information_Object_Name}Message" name="{Send | Receive | Reply}{Information_Object_Name}" targetNamespace="http://iec.ch/TC57/2017/{Send | Receive | Reply}{Information_Object_Name}">
+	<wsdl:types>
+		<xs:schema targetNamespace="http://iec.ch/TC57/2017/{Send | Receive | Reply}{Information_Object_Name}" elementFormDefault="qualified">
+			<xs:import namespace="http://iec.ch/TC57/2017/{Information_Object_Name}Message" schemaLocation="xsd/{Information_Object_Name}Message.xsd"/>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="Created{Information_Object_Name}EventMessage">
+		<wsdl:part name="Created{Information_Object_Name}EventMessage" element="infoMessage:Created{Information_Object_Name}"/>
+	</wsdl:message>
+	<wsdl:message name="Changed{Information_Object_Name}EventMessage">
+		<wsdl:part name="Changed{Information_Object_Name}EventMessage" element="infoMessage:Changed{Information_Object_Name}"/>
+	</wsdl:message>
+	<wsdl:message name="Closed{Information_Object_Name}EventMessage">
+		<wsdl:part name="Closed{Information_Object_Name}EventMessage" element="infoMessage:Closed{Information_Object_Name}"/>
+	</wsdl:message>
+	<wsdl:message name="Canceled{Information_Object_Name}EventMessage">
+		<wsdl:part name="Canceled{Information_Object_Name}EventMessage" element="infoMessage:Canceled{Information_Object_Name}"/>
+	</wsdl:message>
+	<wsdl:message name="Deleted{Information_Object_Name}EventMessage">
+		<wsdl:part name="Deleted{Information_Object_Name}EventMessage" element="infoMessage:Deleted{Information_Object_Name}"/>
+	</wsdl:message>
+	<wsdl:message name="ResponseMessage">
+		<wsdl:part name="ResponseMessage" element="infoMessage:{Information_Object_Name}ResponseMessage"/>
+	</wsdl:message>
+	<wsdl:message name="FaultMessage">
+		<wsdl:part name="FaultMessage" element="infoMessage:{Information_Object_Name}FaultMessage"/>
+	</wsdl:message>
+	<wsdl:portType name="{Information_Object_Name}_Port">
+		<wsdl:operation name="Created{Information_Object_Name}">
+			<wsdl:input name="Created{Information_Object_Name}Event" message="tns:Created{Information_Object_Name}EventMessage"/>
+			<wsdl:output name="Created{Information_Object_Name}Response" message="tns:ResponseMessage"/>
+			<wsdl:fault name="Created{Information_Object_Name}Fault" message="tns:FaultMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="Changed{Information_Object_Name}">
+			<wsdl:input name="Changed{Information_Object_Name}Event" message="tns:Changed{Information_Object_Name}EventMessage"/>
+			<wsdl:output name="Changed{Information_Object_Name}Response" message="tns:ResponseMessage"/>
+			<wsdl:fault name="Changed{Information_Object_Name}Fault" message="tns:FaultMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="Canceled{Information_Object_Name}">
+			<wsdl:input name="Canceled{Information_Object_Name}Event" message="tns:Canceled{Information_Object_Name}EventMessage"/>
+			<wsdl:output name="Canceled{Information_Object_Name}Response" message="tns:ResponseMessage"/>
+			<wsdl:fault name="Canceled{Information_Object_Name}Fault" message="tns:FaultMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="Closed{Information_Object_Name}">
+			<wsdl:input name="Closed{Information_Object_Name}Event" message="tns:Closed{Information_Object_Name}EventMessage"/>
+			<wsdl:output name="Closed{Information_Object_Name}Response" message="tns:ResponseMessage"/>
+			<wsdl:fault name="Closed{Information_Object_Name}Fault" message="tns:FaultMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="Deleted{Information_Object_Name}">
+			<wsdl:input name="Deleted{Information_Object_Name}Event" message="tns:Deleted{Information_Object_Name}EventMessage"/>
+			<wsdl:output name="Deleted{Information_Object_Name}Response" message="tns:ResponseMessage"/>
+			<wsdl:fault name="Deleted{Information_Object_Name}Fault" message="tns:FaultMessage"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="{Information_Object_Name}_Binding" type="tns:{Information_Object_Name}_Port">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="Created{Information_Object_Name}">
+			<soap:operation soapAction="http://iec.ch/TC57/2017/{Information_Object_Name}/Created{Information_Object_Name}" style="document"/>
+			<wsdl:input name="Created{Information_Object_Name}Event">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="Created{Information_Object_Name}Response">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="Created{Information_Object_Name}Fault">
+				<soap:fault name="Created{Information_Object_Name}Fault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="Changed{Information_Object_Name}">
+			<soap:operation soapAction="http://iec.ch/TC57/2017/{Information_Object_Name}/Changed{Information_Object_Name}" style="document"/>
+			<wsdl:input name="Changed{Information_Object_Name}Event">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="Changed{Information_Object_Name}Response">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="Changed{Information_Object_Name}Fault">
+				<soap:fault name="Changed{Information_Object_Name}Fault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="Canceled{Information_Object_Name}">
+			<soap:operation soapAction="http://iec.ch/TC57/2017/{Information_Object_Name}/Canceled{Information_Object_Name}" style="document"/>
+			<wsdl:input name="Canceled{Information_Object_Name}Event">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="Canceled{Information_Object_Name}Response">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="Canceled{Information_Object_Name}Fault">
+				<soap:fault name="Canceled{Information_Object_Name}Fault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="Closed{Information_Object_Name}">
+			<soap:operation soapAction="http://iec.ch/TC57/2017/{Information_Object_Name}/Closed{Information_Object_Name}" style="document"/>
+			<wsdl:input name="Closed{Information_Object_Name}Event">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="Closed{Information_Object_Name}Response">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="Closed{Information_Object_Name}Fault">
+				<soap:fault name="Closed{Information_Object_Name}Fault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="Deleted{Information_Object_Name}">
+			<soap:operation soapAction="http://iec.ch/TC57/2017/{Information_Object_Name}/Deleted{Information_Object_Name}" style="document"/>
+			<wsdl:input name="Deleted{Information_Object_Name}Event">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="Deleted{Information_Object_Name}Response">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="Deleted{Information_Object_Name}Fault">
+				<soap:fault name="Deleted{Information_Object_Name}Fault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="{Send | Receive | Reply}{Information_Object_Name}">
+		<wsdl:port name="{Information_Object_Name}_Port" binding="tns:{Information_Object_Name}_Binding">
+			<soap:address location="http://iec.ch/TC57/2017/{Send | Receive | Reply}{Information_Object_Name}"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

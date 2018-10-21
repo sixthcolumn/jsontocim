@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:camel="http://camel.apache.org/schema/spring"
+	xsi:schemaLocation="
+         http://www.springframework.org/schema/beans 
+         http://www.springframework.org/schema/beans/spring-beans.xsd
+         http://camel.apache.org/schema/spring 
+         http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+	<!-- a bean for Device Control Service service -->
+	<bean id="testProcess"
+		class="com.sixthc.ecg.TestProcessor" />
+	<bean id="decodeEDCResponse"
+		class="com.sixthc.ecg.DecodeEDCResponse" />
+
+	<camelContext
+		xmlns="http://camel.apache.org/schema/spring">
+		<dataFormats>
+			<json id="json" library="Jackson" />
+		</dataFormats>
+
+		<onException>
+			<exception>com.sixthc.ecg.InvalidJSON</exception>
+			<handled>
+				<constant>true</constant>
+			</handled>
+			<setHeader headerName="Exchange.HTTP_RESPONSE_CODE">
+				<constant>400</constant>
+			</setHeader>
+			<setBody>
+				<simple>${exception.message}\n</simple>
+			</setBody>
+		</onException>
+
+		<onException>
+			<exception>com.sixthc.ecg.DeviceNotFoundException</exception>
+			<handled>
+				<constant>true</constant>
+			</handled>
+			<setHeader headerName="Exchange.HTTP_RESPONSE_CODE">
+				<constant>404</constant>
+			</setHeader>
+			<setBody>
+				<constant />
+			</setBody>
+		</onException>
+
+		<onException>
+			<exception>java.lang.Exception</exception>
+			<handled>
+				<constant>true</constant>
+			</handled>
+			<setHeader headerName="Exchange.HTTP_RESPONSE_CODE">
+				<constant>500</constant>
+			</setHeader>
+			<setBody>
+				<simple>${exception.message}\n</simple>
+			</setBody>
+		</onException>
+
+		<restConfiguration component="servlet"
+			bindingMode="json" contextPath="cim4/rest" port="8080"
+			apiContextPath="api-doc" apiContextListing="true" enableCORS="true">
+
+			<!-- we want json output in pretty mode -->
+			<dataFormatProperty key="prettyPrint" value="true" />
+
+			<!-- setup swagger api descriptions -->
+			<apiProperty key="base.path" value="rest" />
+			<apiProperty key="api.version" value="2.0.0" />
+			<apiProperty key="api.title"
+				value="End Device Controls" />
+			<apiProperty key="api.description"
+				value="Execute End Device Controls Create/Get Service" />
+			<apiProperty key="api.contact.name"
+				value="Sixthc" />
+
+		</restConfiguration>
+
+		<rest path="/endDeviceControls" consumes="application/json"
+			produces="application/json">
+			<description>CIMRequest</description>
+
+			<get uri="/{mrid}"
+				outType="ch.iec.tc57._2011.schema.message.ReplyType">
+				<description>Returns a end device controls message</description>
+				<param name="id" type="path" description="The MRID" />
+				<responseMessage code="200"
+					message="The End Device Controls Entry with MRID" />
+				<responseMessage code="404"
+					message="End Device Controls with MRID not found" />
+				<responseMessage code="500" message="Server error" />
+				<to
+					uri="direct:get"/>
+			</get>
+			<post uri="/create"
+				type="com.sixthc.ecg.jsonpojo.CreateEndDeviceControls"
+				outType="com.sixthc.ecg.jsonpojo.CreateEndDeviceControls">
+				<description>Posts end device controls request</description>
+								<responseMessage code="200"
+					message="End Device Controls created" />
+				<responseMessage code="400"
+					message="insufficient/invalid input data" />
+				<responseMessage code="500" message="Server error" />
+				<to uri="direct:create"/>
+			</post>
+		</rest>
+		<route>
+			<from uri="direct:get" />
+			<marshal ref="json"/>
+			<to uri="file://file.out"/>
+		</route>
+		<route>
+			<from uri="direct:create" />
+			<process ref="testProcess" />
+			<setHeader headerName="soapAction"><constant>http://iec.ch/TC57/2017/EndDeviceControls/CreateEndDeviceControls</constant></setHeader> 
+			<to uri="http://localhost:8091/mockEndDeviceControlsEndpoint?bridgeEndpoint=true"/>
+			<process ref="decodeEDCResponse"/>
+			<to uri="file://file.out"/>
+		</route>
+
+	</camelContext>
+
+</beans>

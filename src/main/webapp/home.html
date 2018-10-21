@@ -1,0 +1,46 @@
+<html>
+<head>
+    <title>Servlet with Swagger converts JSON to SOAP </title>
+</head>
+
+<body>
+
+This example shows how to use Servlet REST to define REST endpoints in Camel routes using the Rest DSL in XML,
+and using camel-swagger-java to expose the REST service APIs.
+
+<br/>
+
+This example is implemented in XML DSL.
+
+<br/>
+The XML DSL the routes are define in XML code, in the <tt>src/main/resources/camel.xml</tt> file.
+
+<p/>
+There is a <i>order</i> REST service that supports the following operations
+<ul>
+  <li>GET /endDeviceControls/{MRID}</li>
+  <li>POST /endDeviceControls</li>
+</ul>
+
+From a web browser you can access the first service using the following links
+
+<ul>
+  <li><a href="rest/endDeviceControls/1">rest/endDeviceControls/1</a> - get endDeviceControls with MRID = 1</li>
+  <li><a href="rest/endDeviceControls/86">rest/endDeviceControls/86</a> - return 404 (not found)</li>
+</ul>
+
+From the command shell you can use curl to access the service as shown below:
+<pre>
+    curl -v -X POST -H "Content-Type: application/json" -d '{ "@schemaLocation": "http://iec.ch/TC57/2017/EndDeviceControlsMessage EndDeviceControlsMessage.xsd", "SoapServerURL": "http://localhost:8088/mockEndDeviceControls", "Header": { "Verb": "create", "Noun": "EndDeviceControls", "Timestamp": "2017-06-20T11:24:04-06:00", "MessageID": "aab72e66-d8b4-406c-8e18-4df2864cf947", "CorrelationID": "3a913c02-bc54-4a63-b82a-b255ffa0b7da" }, "Payload": {   "EndDeviceControls": {  "EndDeviceControl": {  "mRID": "2b928834-b538-4244-9daf-6db54f700a76", "EndDeviceControlType": {           "@ref": "2.31.0.18" }, "EndDeviceGroups": { "Names": { "name": "DG2"  }  }  }  }  } }' http://localhost:8080/cim4/rest/endDeviceControls/create
+    curl -v -X POST -H "Content-Type: application/json" -d '{ "@schemaLocation": "http://iec.ch/TC57/2017/EndDeviceControlsMessage EndDeviceControlsMessage.xsd", "SoapServerURL": "http://localhost:8088/mockEndDeviceControls", "ForceError": "true", "Header": { "Verb": "create", "Noun": "EndDeviceControls", "Timestamp": "2017-06-20T11:24:04-06:00", "MessageID": "aab72e66-d8b4-406c-8e18-4df2864cf947", "CorrelationID": "3a913c02-bc54-4a63-b82a-b255ffa0b7da" }, "Payload": {   "EndDeviceControls": {  "EndDeviceControl": {  "mRID": "2b928834-b538-4244-9daf-6db54f700a76", "EndDeviceControlType": {           "@ref": "2.31.0.18" }, "EndDeviceGroups": { "Names": { "name": "DG2"  }  }  }  }  } }' http://localhost:8080/cim4/rest/endDeviceControls/create
+</pre>
+
+<p/>
+
+The example comes with Swagger API documentation which you can access from the following url:
+
+  <a href="rest/api-doc/camel-1">http://localhost:8080/cim4/rest/rest/api-doc/camel-1</a>
+
+</body>
+
+</html>

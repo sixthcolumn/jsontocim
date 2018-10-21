@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:tns="http://iec.ch/TC57/2017/{Request | Execute}{Information_Object_Name}" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:wsi="http://ws-i.org/schemas/conformanceClaim/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:infoMessage="http://iec.ch/TC57/2017/{Information_Object_Name}Message" name="{Request | Execute}{Information_Object_Name}" targetNamespace="http://iec.ch/TC57/2017/{Request | Execute}{Information_Object_Name}">
+	<wsdl:types>
+		<xs:schema targetNamespace="http://iec.ch/TC57/2017/{Request | Execute}{Information_Object_Name}" elementFormDefault="qualified">
+			<xs:import namespace="http://iec.ch/TC57/2017/{Information_Object_Name}Message" schemaLocation="xsd/{Information_Object_Name}Message.xsd"/>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="Create{Information_Object_Name}RequestMessage">
+		<wsdl:part name="Create{Information_Object_Name}RequestMessage" element="infoMessage:Create{Information_Object_Name}"/>
+	</wsdl:message>
+	<wsdl:message name="Change{Information_Object_Name}RequestMessage">
+		<wsdl:part name="Change{Information_Object_Name}RequestMessage" element="infoMessage:Change{Information_Object_Name}"/>
+	</wsdl:message>
+	<wsdl:message name="Close{Information_Object_Name}RequestMessage">
+		<wsdl:part name="Close{Information_Object_Name}RequestMessage" element="infoMessage:Close{Information_Object_Name}"/>
+	</wsdl:message>
+	<wsdl:message name="Cancel{Information_Object_Name}RequestMessage">
+		<wsdl:part name="Cancel{Information_Object_Name}RequestMessage" element="infoMessage:Cancel{Information_Object_Name}"/>
+	</wsdl:message>
+	<wsdl:message name="Delete{Information_Object_Name}RequestMessage">
+		<wsdl:part name="Delete{Information_Object_Name}RequestMessage" element="infoMessage:Delete{Information_Object_Name}"/>
+	</wsdl:message>
+	<wsdl:message name="ResponseMessage">
+		<wsdl:part name="ResponseMessage" element="infoMessage:{Information_Object_Name}ResponseMessage"/>
+	</wsdl:message>
+	<wsdl:message name="FaultMessage">
+		<wsdl:part name="FaultMessage" element="infoMessage:{Information_Object_Name}FaultMessage"/>
+	</wsdl:message>
+	<wsdl:portType name="{Information_Object_Name}_Port">
+		<wsdl:operation name="Create{Information_Object_Name}">
+			<wsdl:input name="Create{Information_Object_Name}Request" message="tns:Create{Information_Object_Name}RequestMessage"/>
+			<wsdl:output name="Create{Information_Object_Name}Response" message="tns:ResponseMessage"/>
+			<wsdl:fault name="Create{Information_Object_Name}Fault" message="tns:FaultMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="Change{Information_Object_Name}">
+			<wsdl:input name="Change{Information_Object_Name}Request" message="tns:Change{Information_Object_Name}RequestMessage"/>
+			<wsdl:output name="Change{Information_Object_Name}Response" message="tns:ResponseMessage"/>
+			<wsdl:fault name="Change{Information_Object_Name}Fault" message="tns:FaultMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="Cancel{Information_Object_Name}">
+			<wsdl:input name="Cancel{Information_Object_Name}Request" message="tns:Cancel{Information_Object_Name}RequestMessage"/>
+			<wsdl:output name="Cancel{Information_Object_Name}Response" message="tns:ResponseMessage"/>
+			<wsdl:fault name="Cancel{Information_Object_Name}Fault" message="tns:FaultMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="Close{Information_Object_Name}">
+			<wsdl:input name="Close{Information_Object_Name}Request" message="tns:Close{Information_Object_Name}RequestMessage"/>
+			<wsdl:output name="Close{Information_Object_Name}Response" message="tns:ResponseMessage"/>
+			<wsdl:fault name="Close{Information_Object_Name}Fault" message="tns:FaultMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="Delete{Information_Object_Name}">
+			<wsdl:input name="Delete{Information_Object_Name}Request" message="tns:Delete{Information_Object_Name}RequestMessage"/>
+			<wsdl:output name="Delete{Information_Object_Name}Response" message="tns:ResponseMessage"/>
+			<wsdl:fault name="Delete{Information_Object_Name}Fault" message="tns:FaultMessage"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="{Information_Object_Name}_Binding" type="tns:{Information_Object_Name}_Port">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="Create{Information_Object_Name}">
+			<soap:operation soapAction="http://iec.ch/TC57/2017/{Information_Object_Name}/Create{Information_Object_Name}" style="document"/>
+			<wsdl:input name="Create{Information_Object_Name}Request">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="Create{Information_Object_Name}Response">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="Create{Information_Object_Name}Fault">
+				<soap:fault name="Create{Information_Object_Name}Fault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="Change{Information_Object_Name}">
+			<soap:operation soapAction="http://iec.ch/TC57/2017/{Information_Object_Name}/Change{Information_Object_Name}" style="document"/>
+			<wsdl:input name="Change{Information_Object_Name}Request">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="Change{Information_Object_Name}Response">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="Change{Information_Object_Name}Fault">
+				<soap:fault name="Change{Information_Object_Name}Fault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="Cancel{Information_Object_Name}">
+			<soap:operation soapAction="http://iec.ch/TC57/2017/{Information_Object_Name}/Cancel{Information_Object_Name}" style="document"/>
+			<wsdl:input name="Cancel{Information_Object_Name}Request">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="Cancel{Information_Object_Name}Response">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="Cancel{Information_Object_Name}Fault">
+				<soap:fault name="Cancel{Information_Object_Name}Fault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="Close{Information_Object_Name}">
+			<soap:operation soapAction="http://iec.ch/TC57/2017/{Information_Object_Name}/Close{Information_Object_Name}" style="document"/>
+			<wsdl:input name="Close{Information_Object_Name}Request">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="Close{Information_Object_Name}Response">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="Close{Information_Object_Name}Fault">
+				<soap:fault name="Close{Information_Object_Name}Fault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="Delete{Information_Object_Name}">
+			<soap:operation soapAction="http://iec.ch/TC57/2017/{Information_Object_Name}/Delete{Information_Object_Name}" style="document"/>
+			<wsdl:input name="Delete{Information_Object_Name}Request">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="Delete{Information_Object_Name}Response">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="Delete{Information_Object_Name}Fault">
+				<soap:fault name="Delete{Information_Object_Name}Fault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="{Request | Execute}{Information_Object_Name}">
+		<wsdl:port name="{Information_Object_Name}_Port" binding="tns:{Information_Object_Name}_Binding">
+			<soap:address location="http://iec.ch/TC57/2017/{Request | Execute}{Information_Object_Name}"/>
+		</wsdl:port>
+	</wsdl:service>
+	<xs:schema targetNamespace="http://iec.ch/TC57/2017/{Request | Execute}{Information_Object_Name}Message" elementFormDefault="qualified">
+		<xs:import namespace="http://iec.ch/TC57/2017/{Information_Object_Name}Message" schemaLocation="xsd/{Information_Object_Name}Message.xsd"/>
+		<!--<xs:include schemaLocation="xsd/{Information_Object_Name}Message.xsd"/>-->
+	</xs:schema>
+</wsdl:definitions>

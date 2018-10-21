@@ -1,0 +1,27 @@
+{
+   "@schemaLocation": "http://iec.ch/TC57/2017/EndDeviceControlsMessage EndDeviceControlsMessage.xsd",
+   "SOAPServerURL": "?",
+   "ForceError": "true",
+   "Header": {
+      "Verb": "?",
+      "Noun": "?",
+      "Timestamp": "?",
+      "MessageID": "?",
+      "CorrelationID": "?"
+   },
+   "Payload": {
+      "EndDeviceControls": {
+         "EndDeviceControl": {
+            "mRID": "?",
+            "EndDeviceControlType": {
+               "@ref": "?"
+            },
+            "EndDeviceGroups": {
+               "Names": {
+                  "name": "?"
+               }
+            }
+         }
+      }
+   }
+}
