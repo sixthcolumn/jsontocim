@@ -96,7 +96,7 @@
 			</get>
 			<post uri="/create"
 				type="com.sixthc.ecg.jsonpojo.CreateEndDeviceControls"
-				outType="com.sixthc.ecg.jsonpojo.CreateEndDeviceControls">
+				outType="ch.iec.tc57._2011.schema.message.ReplyType">
 				<description>Posts end device controls request</description>
 								<responseMessage code="200"
 					message="End Device Controls created" />
