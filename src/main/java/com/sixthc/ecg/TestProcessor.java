@@ -1,43 +1,34 @@
 package com.sixthc.ecg;
 
 import java.io.StringWriter;
-
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBElement;
+import javax.xml.bind.Marshaller;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
+import javax.xml.namespace.QName;
 
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
+import org.apache.log4j.Logger;
 
 import com.sixthc.ecg.jsonpojo.CreateEndDeviceControls;
 
-import org.apache.log4j.Logger;
-
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.JAXBElement;
-import javax.xml.namespace.QName;
-
-
-import ch.iec.tc57._2017.enddevicecontrolsmessage.EndDeviceControlsRequestMessageType;
 import ch.iec.tc57._2011.enddevicecontrols_.EndDeviceControl;
 import ch.iec.tc57._2011.enddevicecontrols_.EndDeviceControl.EndDeviceControlType;
 import ch.iec.tc57._2011.enddevicecontrols_.EndDeviceControls;
 import ch.iec.tc57._2011.enddevicecontrols_.EndDeviceGroup;
 import ch.iec.tc57._2011.enddevicecontrols_.Name;
 import ch.iec.tc57._2011.schema.message.HeaderType;
-import ch.iec.tc57._2011.schema.message.ReplyType;
 import ch.iec.tc57._2017.enddevicecontrolsmessage.EndDeviceControlsPayloadType;
-import ch.iec.tc57._2017.executeenddevicecontrols.EndDeviceControlsPort;
-import ch.iec.tc57._2017.executeenddevicecontrols.ExecuteEndDeviceControls;
-import ch.iec.tc57._2017.executeenddevicecontrols.FaultMessage;
+import ch.iec.tc57._2017.enddevicecontrolsmessage.EndDeviceControlsRequestMessageType;
 
 public class TestProcessor implements Processor {
 
